@@ -1,10 +1,10 @@
 import { Request, Response, Router } from 'express';
-import { Signin } from './dtos/signin';
+import { SignIn } from './dtos/signin';
 
 const Auth = Router();
 
 Auth.post('/signin', (req: Request, res: Response) => {
-	const { username, password } = req.body as Signin;
+	const { username, password } = req.body as SignIn;
 
 	try {
 		return res
