@@ -16,6 +16,8 @@ model Adm {
   last_name String
   username  String @unique
   password  String
+
+  @@map("adm")
 }
 
 model Customer {
@@ -25,6 +27,8 @@ model Customer {
   phone_number String
   cpf          String
   Address      Address[]
+
+  @@map("customer")
 }
 
 model Address {
@@ -39,4 +43,6 @@ model Address {
   complement String
   Customer   Customer? @relation(fields: [customerId], references: [id])
   customerId String?
+
+  @@map("address")
 }
