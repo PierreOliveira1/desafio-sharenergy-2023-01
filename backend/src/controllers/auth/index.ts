@@ -1,9 +1,11 @@
 import { Request, Response, Router } from 'express';
 import { compare } from 'bcryptjs';
-import { SignIn } from './dtos/signin';
-import jwt from 'jsonwebtoken';
-import { JWT_SECRET } from '@src/config/envs';
+import dayjs from 'dayjs';
 import prisma from '@database';
+import { SignIn } from './dtos/signin';
+import { generateRefreshToken } from '@utils/generateRefreshToken';
+import { RefreshToken } from './dtos/refreshToken';
+import { generateToken } from '@utils/generateToken';
 
 const Auth = Router();
 
@@ -29,14 +31,51 @@ Auth.post('/signin', async (req: Request, res: Response) => {
 				.send({ error: true, message: 'User or password incorrect' });
 		}
 
-		const token = jwt.sign({}, JWT_SECRET, {
-			subject: userAlreadyExists.id,
-			expiresIn: '20s',
+		const token = await generateToken(userAlreadyExists.id);
+
+		const refreshToken = await generateRefreshToken(userAlreadyExists.id);
+
+		return res.status(200).send({ success: true, token, refreshToken });
+	} catch (err) {
+		return res
+			.status(500)
+			.send({ error: true, message: 'Internal server error' });
+	}
+});
+
+Auth.post('/refreshToken', async (req: Request, res: Response) => {
+	const { refresh_token } = req.body as RefreshToken;
+
+	try {
+		const refreshToken = await prisma.refreshToken.findFirst({
+			where: { id: refresh_token },
 		});
 
+		if (!refreshToken) {
+			return res
+				.status(400)
+				.send({ error: true, message: 'Refresh token invalid' });
+		}
+
+		const refreshTokenExpired = dayjs().isAfter(
+			dayjs.unix(refreshToken.expiresIn)
+		);
+
+		const token = await generateToken(refreshToken.id);
+
+		if (refreshTokenExpired) {
+			const newRefreshToken = await generateRefreshToken(refreshToken.admId);
+
+			return res
+				.status(200)
+				.send({ success: true, token, refreshToken: newRefreshToken });
+		}
+
 		return res.status(200).send({ success: true, token });
-	} catch (err) {
-		return res.status(401).send({ error: true, message: err });
+	} catch (error) {
+		return res
+			.status(500)
+			.send({ error: true, message: 'Internal server error' });
 	}
 });
 
