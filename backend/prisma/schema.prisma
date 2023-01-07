@@ -11,13 +11,23 @@ datasource db {
 }
 
 model Adm {
-  id        String @id @default(uuid()) @map("_id")
-  name      String
-  last_name String
-  username  String @unique
-  password  String
+  id           String        @id @default(uuid()) @map("_id")
+  name         String
+  last_name    String
+  username     String        @unique
+  password     String
+  RefreshToken RefreshToken?
 
   @@map("adm")
+}
+
+model RefreshToken {
+  id        String @id @default(uuid()) @map("_id")
+  expiresIn Int
+  adm       Adm    @relation(fields: [admId], references: [id])
+  admId     String @unique
+
+  @@map("refresh_token")
 }
 
 model Customer {
