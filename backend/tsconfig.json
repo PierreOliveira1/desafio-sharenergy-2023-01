@@ -101,7 +101,9 @@
     "skipLibCheck": true,                                 /* Skip type checking all .d.ts files. */
 		"paths": {
 			"@src/*": ["./src/*"],
-			"@database": ["./src/database/index"]
+			"@database": ["./src/database/index"],
+			"@middlewares/*": ["./src/middlewares/*"],
+			"@utils/*": ["./src/utils/*"]
 		}
 	},
 	"ts-node": {
