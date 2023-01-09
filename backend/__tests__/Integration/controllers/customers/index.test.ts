@@ -128,6 +128,42 @@ describe('Customers', () => {
 		expect(isCustomers).toBeTruthy();
 	});
 
+	it('should be update customer', async () => {
+		const updateCustomer = await prisma.customer.findFirst({
+			where: { email: customer.email },
+		});
+
+		const response = await supertest(app)
+			.patch(`/customers/${updateCustomer?.id}`)
+			.set('authorization', `Bearer ${await getToken()}`)
+			.send({ fullName: 'Roberto Oliveira' });
+
+		const updatedCustomer = await prisma.customer.findFirst({
+			where: { email: customer.email },
+		});
+
+		expect(response.statusCode).toBe(200);
+		expect(response.body).toHaveProperty('success');
+		expect(response.body.success).toBeTruthy();
+		expect(response.body).toHaveProperty('message');
+		expect(response.body.message).toBe('Customer updated successfully');
+		expect(updatedCustomer).toHaveProperty('fullName');
+		expect(updatedCustomer?.fullName).toBe('Roberto Oliveira');
+	});
+
+	it('should be error update customer', async () => {
+		const response = await supertest(app)
+			.patch('/customers/teste')
+			.set('authorization', `Bearer ${await getToken()}`)
+			.send({ fullName: 'Roberto Oliveira' });
+
+		expect(response.statusCode).toBe(400);
+		expect(response.body).toHaveProperty('error');
+		expect(response.body.error).toBeTruthy();
+		expect(response.body).toHaveProperty('message');
+		expect(response.body.message).toBe('Error when updating customer');
+	});
+
 	it('should be delete customer', async () => {
 		const deleteCustomer = await prisma.customer.findFirst({
 			where: { email: customer.email },
