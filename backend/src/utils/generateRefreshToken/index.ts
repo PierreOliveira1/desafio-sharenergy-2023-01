@@ -2,7 +2,7 @@ import prisma from '@database';
 import dayjs from 'dayjs';
 
 async function generateRefreshToken(admId: string) {
-	const expiresIn = dayjs().add(15, 'seconds').unix();
+	const expiresIn = dayjs().add(30, 'days').unix();
 
 	const refreshTokenAlreadyExists = await prisma.refreshToken.findFirst({
 		where: { admId },
