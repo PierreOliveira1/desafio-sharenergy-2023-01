@@ -100,10 +100,12 @@
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true,                                 /* Skip type checking all .d.ts files. */
 		"paths": {
-			"@src/*": ["./src/*"],
 			"@database": ["./src/database/index"],
 			"@middlewares/*": ["./src/middlewares/*"],
-			"@utils/*": ["./src/utils/*"]
+			"@utils/*": ["./src/utils/*"],
+			"@dtos/*": ["./src/dtos/*"],
+			"@config/*": ["./src/config/*"],
+			"@app": ["./src/app"]
 		}
 	},
 	"ts-node": {
