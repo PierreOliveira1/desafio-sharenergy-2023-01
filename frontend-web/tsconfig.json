@@ -17,7 +17,12 @@
     "jsx": "react-jsx",
 		"types": [
 			"@types/jest"
-		]
+		],
+		"paths": {
+			"@modules/*": ["./src/modules/*"],
+			"@styles/*": ["./src/styles/*"],
+			"@components/*": ["./src/components/*"]
+		}
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
