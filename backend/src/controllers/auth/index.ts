@@ -2,10 +2,9 @@ import { Request, Response, Router } from 'express';
 import { compare } from 'bcryptjs';
 import dayjs from 'dayjs';
 import prisma from '@database';
-import { SignIn } from './dtos/signin';
 import { generateRefreshToken } from '@utils/generateRefreshToken';
-import { RefreshToken } from './dtos/refreshToken';
 import { generateToken } from '@utils/generateToken';
+import { SignIn } from '@dtos/signin';
 
 const Auth = Router();
 
@@ -43,12 +42,12 @@ Auth.post('/signin', async (req: Request, res: Response) => {
 	}
 });
 
-Auth.post('/refreshToken', async (req: Request, res: Response) => {
-	const { refresh_token } = req.body as RefreshToken;
+Auth.post('/refresh_token', async (req: Request, res: Response) => {
+	const idRefreshToken = req.body.refreshToken;
 
 	try {
 		const refreshToken = await prisma.refreshToken.findFirst({
-			where: { id: refresh_token },
+			where: { id: idRefreshToken },
 		});
 
 		if (!refreshToken) {
@@ -61,7 +60,7 @@ Auth.post('/refreshToken', async (req: Request, res: Response) => {
 			dayjs.unix(refreshToken.expiresIn)
 		);
 
-		const token = await generateToken(refreshToken.id);
+		const token = await generateToken(refreshToken.admId);
 
 		if (refreshTokenExpired) {
 			const newRefreshToken = await generateRefreshToken(refreshToken.admId);
