@@ -1,6 +1,6 @@
 import { createServer } from 'node:http';
-import app from './app';
-import { SERVER_PORT } from './config/envs';
+import { SERVER_PORT } from '@config/envs';
+import app from '@app';
 
 const Server = createServer(app);
 
