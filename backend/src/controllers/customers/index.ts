@@ -73,6 +73,30 @@ Customers.post(
 	}
 );
 
+Customers.patch(
+	'/:id',
+	ensureAuthenticated,
+	async (req: Request, res: Response) => {
+		const { id } = req.params;
+		const body = req.body as ICustomers;
+
+		try {
+			await prisma.customer.update({
+				where: { id },
+				data: { ...body, address: { update: { ...body.address } } },
+			});
+
+			return res
+				.status(200)
+				.send({ success: true, message: 'Customer updated successfully' });
+		} catch (err) {
+			return res
+				.status(400)
+				.send({ error: true, message: 'Error when updating customer' });
+		}
+	}
+);
+
 Customers.delete(
 	'/:id',
 	ensureAuthenticated,
