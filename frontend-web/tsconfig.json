@@ -21,7 +21,8 @@
 		"paths": {
 			"@modules/*": ["./src/modules/*"],
 			"@styles/*": ["./src/styles/*"],
-			"@components/*": ["./src/components/*"]
+			"@components/*": ["./src/components/*"],
+			"@routes/*": ["./src/routes/*"]
 		}
   },
   "include": ["src"],
