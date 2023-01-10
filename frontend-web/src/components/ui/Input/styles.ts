@@ -5,5 +5,8 @@ export const Input = styled.input<{
 	height?: string;
 }>`
 	width: ${({ width }) => width || '100%'};
-	height: ${({ height }) => height || '50px'};
+	height: ${({ height }) => height || '40px'};
+	padding: 10px;
+	border-radius: 10px;
+	box-shadow: ${({ theme }) => theme.boxShadow};
 `;
