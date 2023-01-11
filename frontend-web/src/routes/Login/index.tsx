@@ -2,7 +2,7 @@ import { Loading } from '@components/common/Loading';
 import { lazy } from 'react';
 import { Suspense } from 'react';
 
-const LazyLogin = lazy(() => import('@modules/auth/pages/Login'));
+const LazyLogin = lazy(() => import('@modules/login'));
 
 function Login() {
 	return(
