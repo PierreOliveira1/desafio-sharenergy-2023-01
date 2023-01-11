@@ -1,36 +1,27 @@
-import { ChangeEvent, InputHTMLAttributes } from 'react';
-import { UseFormRegisterReturn } from 'react-hook-form';
+import { forwardRef, InputHTMLAttributes, Ref } from 'react';
 import { Checkmark, Container, InputCheckbox } from './style';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
-  id?: string;
-  name: string;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-  isChecked?: boolean;
   label?: string;
-  value?: string | number;
 	color?: string;
-  register?: UseFormRegisterReturn;
 }
 
-function Checkbox(props: Props) {
-	const { id, name, onChange, isChecked, label, value, register, color } = props;
+function CheckboxComponent(props: Props, ref: Ref<HTMLInputElement>) {
+	const { label, color, ...rest } = props;
 
 	return (
 		<Container color={color}>
 			<InputCheckbox
+				ref={ref}
 				type="checkbox"
-				id={id}
-				name={name}
-				onChange={onChange}
-				checked={isChecked}
-				value={value}
-				{...register}
+				{...rest}
 			/>
 			<Checkmark />
 			{label}
 		</Container>
 	);
 }
+
+const Checkbox = forwardRef(CheckboxComponent);
 
 export { Checkbox };
