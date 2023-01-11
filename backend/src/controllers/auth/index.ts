@@ -9,7 +9,7 @@ import { SignIn } from '@dtos/signin';
 const Auth = Router();
 
 Auth.post('/signin', async (req: Request, res: Response) => {
-	const { username, password } = req.body as SignIn;
+	const { username, password, rememberMe } = req.body as SignIn;
 
 	try {
 		const userAlreadyExists = await prisma.adm.findFirst({
@@ -32,13 +32,18 @@ Auth.post('/signin', async (req: Request, res: Response) => {
 
 		const token = await generateToken(userAlreadyExists.id);
 
-		const refreshToken = await generateRefreshToken(userAlreadyExists.id);
+		if (rememberMe) {
+			const refreshToken = await generateRefreshToken(userAlreadyExists.id);
 
-		return res.status(200).send({ success: true, token, refreshToken });
+			return res.status(200).send({ success: true, token, refreshToken });
+		}
+
+		return res.status(200).send({ success: true, token });
 	} catch (err) {
+		console.log(err);
 		return res
-			.status(500)
-			.send({ error: true, message: 'Internal server error' });
+			.status(400)
+			.send({ error: true, message: 'Error when authenticating' });
 	}
 });
 
