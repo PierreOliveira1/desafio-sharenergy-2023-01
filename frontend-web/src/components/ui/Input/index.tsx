@@ -28,7 +28,7 @@ function InputComponent(props: Props, ref: Ref<HTMLInputElement>) {
 			{...rest}
 		/>
 		{isPassword && (
-			<Styles.Icon onClick={handleViewPassword}>
+			<Styles.Icon type='button' onClick={handleViewPassword}>
 				{
 					viewPassword ? <EyeClosedIcon /> : <EyeOpenIcon />
 				}
