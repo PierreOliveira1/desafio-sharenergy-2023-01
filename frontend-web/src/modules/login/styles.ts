@@ -59,14 +59,25 @@ export const Form = styled.form`
 	margin-top: 3rem;
 `;
 
-export const BoxInputCheckbox = styled.div`
+export const Box = styled.div<{
+	margin?: string;
+}>`
 	width: 100%;
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-	margin: 2rem 0;
+	margin: ${({ margin }) => margin || '0'};
 `;
 
 export const BoxCheckbox = styled.div`
 	width: 80%;
+	margin: 10px 0 0 0;
+`;
+
+export const MessageError = styled.span`
+	width: 80%;
+	padding: 5px;
+	font-size: 0.8rem;
+	font-weight: 400;
+	color: #FF0000;
 `;
