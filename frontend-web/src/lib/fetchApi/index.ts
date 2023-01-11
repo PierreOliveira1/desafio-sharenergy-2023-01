@@ -26,9 +26,9 @@ async function fetchApi(url: string, init?: RequestInit | undefined): Promise<Re
 	if(response.status >= 200 && response.status < 300) {
 		return response;
 	} else {
-		const { error } = (await response.json()) as { error: string };
+		const { message } = (await response.json()) as { message: string };
 
-		throw new ApiError(response.status, `${error}`);
+		throw new ApiError(response.status, `${message}`);
 	}
 }
 
