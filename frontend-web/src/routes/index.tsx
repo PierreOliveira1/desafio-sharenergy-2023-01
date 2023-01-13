@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Login } from '@routes/Login';
 import { Loading } from '@components/common/Loading';
 import { Header } from '@components/common/Header';
+import { HttpCode } from '@routes/HttpCode';
 
 const router = createBrowserRouter([
 	{
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
 			{
 				path: '/',
 				element: <Loading />
+			},
+			{
+				path: '/http-code',
+				element: <HttpCode />
 			}
 		]
 	}
