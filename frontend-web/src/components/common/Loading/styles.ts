@@ -1,11 +1,15 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
-export const Container = styled.div`
+export const Container = styled(motion.div)`
 	width: 100%;
 	height: 100vh;
-	display: flex;
+	display: none;
 	justify-content: center;
 	align-items: center;
+	position: fixed;
+	z-index: 100;
+	background-color: rgba(0, 0, 0, 0.5);
 `;
 
 export const OnLoading = styled.div`
