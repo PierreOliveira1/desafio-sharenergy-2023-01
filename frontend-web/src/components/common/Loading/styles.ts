@@ -12,8 +12,8 @@ export const OnLoading = styled.div`
 	display: flex;
 
 	& div {
-		width: 50px;
-		height: 50px;
+		width: 3.5rem;
+		height: 3.5rem;
 		background: ${({ theme }) => theme.color.primary};
 		border-radius: 50%;
 		margin-left: 15px;
