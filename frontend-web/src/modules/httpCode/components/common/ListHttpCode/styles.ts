@@ -9,5 +9,5 @@ export const Content = styled.div`
 `;
 
 export const BoxHttpCode = styled.div`
-	margin-right: 1rem;
+	margin: 0 1rem 1rem 0;
 `;
