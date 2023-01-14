@@ -7,6 +7,7 @@ export const BoxUser = styled.div`
 	box-shadow: ${({ theme }) => theme.boxShadow};
 	border: ${({ theme }) => theme.border};
 	background-color: ${({ theme }) => theme.color.tertiary};
+	margin: 0.5rem;
 `;
 
 export const BoxUserPicture = styled.div`
