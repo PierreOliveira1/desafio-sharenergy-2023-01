@@ -1,7 +1,8 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Login } from '@routes/Login';
-import { Loading } from '@components/common/Loading';
+// import { Loading } from '@components/common/Loading';
 import { Header } from '@components/common/Header';
+import { Users } from '@routes/Users';
 
 const router = createBrowserRouter([
 	{
@@ -14,11 +15,14 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: '/',
-				element: <Loading />
+				element: <Users />
 			}
 		]
 	}
-]);
+],
+{
+	basename: '/'
+});
 
 function Routes() {
 	return(

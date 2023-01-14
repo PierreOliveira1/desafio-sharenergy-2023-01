@@ -9,7 +9,7 @@ const tabs: Tabs[] = [
 		name: 'Usuários'
 	},
 	{
-		path: '/',
+		path: '/http-code',
 		name: 'HTTP Code'
 	},
 	{
