@@ -1,15 +1,16 @@
 import { ThemeProvider } from 'styled-components';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClientProvider } from 'react-query';
 import { theme } from '@styles/theme';
 import Routes from './routes';
-import GlobalStyles from './styles/GlobalStyles';
-import { configQueryClient } from './config/configQueryClient';
+import GlobalStyles from '@styles/GlobalStyles';
+import { queryClient } from '@config/queryClient';
+import { Loading } from '@components/common/Loading';
 
-const queryClient = new QueryClient(configQueryClient);
 
 function App() {
 	return (
 		<ThemeProvider theme={theme}>
+			<Loading />
 			<QueryClientProvider client={queryClient}>
 				<GlobalStyles />
 				<Routes />
