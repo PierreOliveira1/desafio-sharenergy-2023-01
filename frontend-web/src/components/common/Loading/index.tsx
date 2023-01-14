@@ -1,4 +1,3 @@
-import React from 'react';
 import * as Styles from './styles';
 
 function Loading() {
