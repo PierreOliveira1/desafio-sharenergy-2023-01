@@ -10,6 +10,7 @@ export const InputContainer = styled.div<StylesInput>`
 	width: ${({ width }) => width || '100%'};
 	height: ${({ height }) => height || '40px'};
 	box-shadow: ${({ theme }) => theme.boxShadow};
+	border: ${({ theme }) => theme.border};
 	margin: ${({ margin }) => margin || '0'};
 	border-radius: 10px;
 	display: flex;
@@ -21,6 +22,7 @@ export const Input = styled.input`
 	height: 100%;
 	padding: 0 20px;
 	border-radius: 10px;
+	background-color: ${({ theme }) => theme.color.tertiary};
 `;
 
 export const Icon = styled.button`
