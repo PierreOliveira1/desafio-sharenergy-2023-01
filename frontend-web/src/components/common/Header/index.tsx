@@ -1,8 +1,12 @@
-import { Outlet } from 'react-router-dom';
+import { useLoading } from '@stores/isLoading';
+import { Outlet, useLocation } from 'react-router-dom';
 import * as Styles from './styles';
 import { tabs } from './tabs';
 
 function Header() {
+	const { setIsLoading } = useLoading();
+	const location = useLocation();
+
 	return (
 		<Styles.Container>
 			<Styles.Header>
@@ -14,7 +18,11 @@ function Header() {
 					<Styles.Ul>
 						{tabs.map(({ path, name }, index) => (
 							<Styles.Li key={index}>
-								<Styles.Link to={path}>{name}</Styles.Link>
+								<Styles.Link to={path} onClick={() => {
+									if(location.pathname !== path) {
+										setIsLoading(true);
+									}
+								}}>{name}</Styles.Link>
 							</Styles.Li>
 						))}
 					</Styles.Ul>
