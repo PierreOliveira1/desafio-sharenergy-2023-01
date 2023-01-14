@@ -6,12 +6,14 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
-import { REFRESH_TOKEN_KEY, TOKEN_KEY } from '../../config/envs';
-import { useLocalStorage } from '../../hooks/useLocalStorage';
-import { fetchApi } from '../../lib/fetchApi';
+import { REFRESH_TOKEN_KEY, TOKEN_KEY } from '@config/envs';
+import { useLocalStorage } from '@hooks/useLocalStorage';
+import { fetchApi } from '@lib/fetchApi';
 import * as Styles from './styles';
 import { OnErrorLogin } from './dtos/onErrorLogin';
 import { OnSuccessLogin } from './dtos/onSuccessLogin';
+import { useLoading } from '@stores/isLoading';
+import { useEffect } from 'react';
 
 type Inputs = {
 	username: string;
@@ -23,7 +25,12 @@ function Login() {
 	const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
 	const [, setToken] = useLocalStorage(TOKEN_KEY, '');
 	const [, setRefreshToken] = useLocalStorage(REFRESH_TOKEN_KEY, '');
+	const { setIsLoading } = useLoading();
 	const navigate = useNavigate();
+
+	useEffect(() => {
+		setIsLoading(false);
+	}, []);
 
 	const mutation = useMutation(({ username, password, rememberMe }: Inputs) => {
 		return fetchApi('/auth/signin', {
@@ -40,6 +47,7 @@ function Login() {
 	});
 
 	const onSubmit: SubmitHandler<Inputs> = async ({ username, password, rememberMe }) => {
+		setIsLoading(true);
 		mutation.mutate({ username, password, rememberMe }, {
 			onSuccess: async (data) => {
 				const { token, refreshToken } = await data.json() as OnSuccessLogin;
@@ -52,19 +60,21 @@ function Login() {
 
 				toast.success('Login efetuado com sucesso!');
 
-
 				setTimeout(() => {
 					navigate('/');
-				}, 700);
+				}, 1000);
 			},
 			onError: async (data) => {
 				const errors = data as OnErrorLogin;
 
-				if(/User or password incorrect/gi.test(errors.message)) {
-					toast.error('Usuário ou senha incorreta, tente novamente!');
-				} else {
-					toast.error('Erro ao efetuar login, verifique e tente novamente!');
-				}
+				setTimeout(() => {
+					setIsLoading(false);
+					if(/User or password incorrect/gi.test(errors.message)) {
+						toast.error('Usuário ou senha incorreta, tente novamente!');
+					} else {
+						toast.error('Erro ao efetuar login, verifique e tente novamente!');
+					}
+				}, 1000);
 			}
 		});
 	};
