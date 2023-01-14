@@ -15,7 +15,7 @@ export const Container = styled.label<{
 	color: ${({ color, theme }) => color || theme.color.secondary};
 
 	&:hover > span {
-		background-color: gray;
+		background-color: #343434;
 	}
 
 	& input:checked ~ span {
@@ -50,10 +50,10 @@ export const Checkmark = styled.span`
 	left: 0;
 	width: 22px;
 	height: 22px;
-	background-color: gray;
+	background-color: #3434;
 	margin-right: 5px;
 	border-radius: 5px;
-	transition: all 200ms;
+	transition: all 300ms;
 
 	&:after {
 		content: '';
