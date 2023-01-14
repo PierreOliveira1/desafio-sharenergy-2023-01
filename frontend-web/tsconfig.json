@@ -23,7 +23,10 @@
 			"@styles/*": ["./src/styles/*"],
 			"@components/*": ["./src/components/*"],
 			"@routes/*": ["./src/routes/*"],
-			"@lib/*": ["./src/lib/*"]
+			"@lib/*": ["./src/lib/*"],
+			"@config/*": ["./src/config/*"],
+			"@hooks/*": ["./src/hooks/*"],
+			"@stores/*": ["./src/stores/*"]
 		}
   },
   "include": ["src"],
