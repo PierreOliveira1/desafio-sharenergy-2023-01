@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 export const Container = styled.div`
 	width: 100%;
-	display: flex;
+	background-color: ${({ theme }) => theme.color.tertiary};
 `;
 
 export const Content = styled.div`
@@ -11,6 +11,7 @@ export const Content = styled.div`
 	height: 40px;
 	display: flex;
 	cursor: pointer;
+	z-index: 1;
 `;
 
 export const BoxName = styled.div`
@@ -38,8 +39,9 @@ export const BoxIcon = styled.div`
 `;
 
 export const BoxHttpCodes = styled(motion.div)`
-	width: 100%;
+	height: 0;
 	padding-left: 2%;
 	display: flex;
 	align-items: center;
+	overflow: auto;
 `;

@@ -1,3 +1,4 @@
+import { useHttpCode } from '@modules/httpCode/store/useHttpCode';
 import * as Styles from './styles';
 
 interface Props {
@@ -5,8 +6,10 @@ interface Props {
 }
 
 function HttpCodeButton({ httpCode }: Props) {
+	const { setHttpCode } = useHttpCode();
+
 	return (
-		<Styles.ButtonHttpCode>
+		<Styles.ButtonHttpCode type='button' onClick={() => setHttpCode(httpCode)}>
 			{httpCode}
 		</Styles.ButtonHttpCode>
 	);
