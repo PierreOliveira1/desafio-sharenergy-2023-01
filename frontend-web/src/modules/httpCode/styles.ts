@@ -10,4 +10,7 @@ export const Container = styled.div`
 	flex-direction: column;
 `;
 
-export const Image = styled.div``;
+export const Image = styled.img`
+	width: 20rem;
+	margin-top: 1rem;
+`;
