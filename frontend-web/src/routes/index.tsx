@@ -4,6 +4,7 @@ import { Login } from '@routes/Login';
 import { Header } from '@components/common/Header';
 import { Users } from '@routes/Users';
 import { HttpCode } from '@routes/HttpCode';
+import { RandomDog } from './RandomDog';
 
 const router = createBrowserRouter([
 	{
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
 			{
 				path: '/http-code',
 				element: <HttpCode />
+			},
+			{
+				path: '/random-dog',
+				element: <RandomDog />
 			}
 		]
 	}

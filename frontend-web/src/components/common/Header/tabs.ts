@@ -13,7 +13,7 @@ const tabs: Tabs[] = [
 		name: 'HTTP Code'
 	},
 	{
-		path: '/',
+		path: '/random-dog',
 		name: 'Cachorros'
 	},
 	{

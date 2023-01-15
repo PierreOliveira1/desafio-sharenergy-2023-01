@@ -1,5 +1,4 @@
-import { lazy } from 'react';
-import { Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 
 const LazyLogin = lazy(() => import('@modules/login'));
 
