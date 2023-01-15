@@ -8,11 +8,13 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 	margin?: string;
 	isPassword?: boolean;
 	type?: string;
+	icon?: JSX.Element;
+	handleIconClick?: (event: MouseEvent<HTMLElement>) => void;
 }
 
 function InputComponent(props: Props, ref: Ref<HTMLInputElement>) {
 	const [viewPassword, setViewPassword] = useState(true);
-	const { width, height, margin, isPassword, type, ...rest } = props;
+	const { width, height, margin, isPassword, type, icon, handleIconClick, ...rest } = props;
 
 	function handleViewPassword(event: MouseEvent<HTMLElement>) {
 		event.preventDefault();
@@ -32,6 +34,11 @@ function InputComponent(props: Props, ref: Ref<HTMLInputElement>) {
 				{
 					viewPassword ? <EyeClosedIcon /> : <EyeOpenIcon />
 				}
+			</Styles.Icon>
+		)}
+		{icon && (
+			<Styles.Icon type="button" onClick={handleIconClick}>
+				{icon}
 			</Styles.Icon>
 		)}
 	</Styles.InputContainer>;
