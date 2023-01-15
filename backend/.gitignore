@@ -2,3 +2,4 @@ node_modules/
 yarn.lock
 coverage/
 .env
+pnpm-lock.yaml
