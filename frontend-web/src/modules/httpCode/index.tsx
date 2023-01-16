@@ -26,15 +26,17 @@ function HttpCode() {
 	}
 
 	return (
-		<Styles.Container>
+		<>
 			<Toaster />
-			<Styles.Image
-				src={`https://http.cat/${httpCode}`}
-				onLoad={handleLoading}
-				onError={onErrorImage}
-			/>
-			<ListSessions />
-		</Styles.Container>
+			<Styles.Container>
+				<Styles.Image
+					src={`https://http.cat/${httpCode}`}
+					onLoad={handleLoading}
+					onError={onErrorImage}
+				/>
+				<ListSessions />
+			</Styles.Container>
+		</>
 	);
 }
 

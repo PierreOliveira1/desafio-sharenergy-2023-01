@@ -11,6 +11,8 @@ export const Container = styled.div`
 `;
 
 export const Image = styled.img`
-	width: 20rem;
+	width: 17rem;
+	max-height: 45%;
+	object-fit: contain;
 	margin-top: 1rem;
 `;

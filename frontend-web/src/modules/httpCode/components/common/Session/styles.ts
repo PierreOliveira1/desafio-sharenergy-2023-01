@@ -8,7 +8,7 @@ export const Container = styled.div`
 
 export const Content = styled.div`
 	width: 100%;
-	height: 40px;
+	height: 3517rempx;
 	display: flex;
 	cursor: pointer;
 	z-index: 1;
