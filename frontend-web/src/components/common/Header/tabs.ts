@@ -17,7 +17,7 @@ const tabs: Tabs[] = [
 		name: 'Cachorros'
 	},
 	{
-		path: '/',
+		path: '/customers',
 		name: 'Clientes'
 	}
 ];

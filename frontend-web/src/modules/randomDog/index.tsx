@@ -3,6 +3,7 @@ import * as Styles from './styles';
 import { useQuery } from 'react-query';
 import { DataDog } from './dtos/dataDog';
 import { queryClient } from '@config/queryClient';
+import { toast, Toaster } from 'react-hot-toast';
 
 function randomDog() {
 	const { setIsLoading } = useLoading();
@@ -21,6 +22,11 @@ function randomDog() {
 		}, 500);
 	}
 
+	function onErrorImage() {
+		toast.error('Erro ao carregar, tente novamente!', { duration: 2000 });
+		handleDeactivateLoading();
+	}
+
 	function handleImageVideo() {
 		if(dog.isSuccess) {
 			const result = dog.data.url.split('.');
@@ -31,6 +37,7 @@ function randomDog() {
 					<Styles.Image
 						src={dog.data.url}
 						onLoad={() => handleDeactivateLoading()}
+						onError={onErrorImage}
 					/>
 				);
 			}
@@ -41,6 +48,7 @@ function randomDog() {
 						<Styles.Iframe
 							src={dog.data.url}
 							onLoad={() => handleDeactivateLoading()}
+							onError={onErrorImage}
 						/>
 					</Styles.BoxIframe>
 				);
@@ -50,6 +58,7 @@ function randomDog() {
 
 	return (
 		<Styles.Container>
+			<Toaster />
 			{handleImageVideo()}
 			<Styles.Refresh
 				type="button"
